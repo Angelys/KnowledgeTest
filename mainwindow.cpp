@@ -1,11 +1,20 @@
 #include "mainwindow.h"
 #include "ui_mainwindow.h"
+#include <QDebug>
 
 MainWindow::MainWindow(QWidget *parent) :
     QMainWindow(parent),
     ui(new Ui::MainWindow)
 {
     ui->setupUi(this);
+
+    key =  "Швидка руда лисиця стрибає навколо ледачої собаки";
+
+    connect(ui->actionOpen, SIGNAL(triggered()), this, SLOT(testOpen()));
+    connect(ui->next, SIGNAL(clicked()), this, SLOT(questionNext()));
+    connect(ui->start, SIGNAL(clicked()), this, SLOT(testStart()));
+
+    ui->stackedWidget->setCurrentIndex(0);
 }
 
 MainWindow::~MainWindow()
@@ -13,12 +22,7 @@ MainWindow::~MainWindow()
     delete ui;
 }
 
-void MainWindow::on_action_triggered()
-{
-    ui->test_name->setText("triggered OLOLO");
-}
-
-void MainWindow::on_actionOpen_triggered()
+void MainWindow::testOpen()
 {
     fileName = QFileDialog::getOpenFileName(this, tr("Файл тесту"), "./", tr("Файли тестів") + " (*.tst)", 0, 0);
 
@@ -49,7 +53,10 @@ void MainWindow::on_actionOpen_triggered()
     QDataStream dataStream(buffer);
     dataStream >> test;
 
+    qDebug() << test;
+
     ui->test_name->setText( test[0][0] );
+    ui->test_time->setText(test[0][1]);
 }
 
 void MainWindow::xorIt(QByteArray *buffer)
@@ -61,12 +68,46 @@ void MainWindow::xorIt(QByteArray *buffer)
     }
 }
 
-void MainWindow::on_start_clicked()
+void MainWindow::testStart()
+{
+    qDebug() << test;
+
+    if(test.empty())
+    {
+        QMessageBox::information(this, tr("Помилка"), tr("Виберіть файл тесту"));
+        return;
+    }
+
+    timeLeft = 15;
+    startTimer(1000);
+
+    ui->stackedWidget->setCurrentIndex(1);
+}
+
+
+
+void MainWindow::questionNext()
 {
 
 }
 
-void MainWindow::on_next_clicked()
+void MainWindow::questionSave()
 {
+}
 
+void MainWindow::submitResult()
+{
+    ui->stackedWidget->setCurrentIndex(2);
+}
+
+void MainWindow::timerEvent(QTimerEvent *event)
+{
+    ui->Timer->display(timeLeft);
+
+    if(timeLeft <=0)
+    {
+        MainWindow::submitResult();
+    }
+
+    timeLeft --;
 }

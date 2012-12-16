@@ -5,6 +5,7 @@
 #include <QTextCodec>
 #include <QFileDialog>
 #include <QMessageBox>
+#include <QTimer>
 
 namespace Ui {
 class MainWindow;
@@ -19,13 +20,12 @@ public:
     ~MainWindow();
     
 private slots:
-    void on_actionOpen_triggered();
-
-    void on_action_triggered();
-
-    void on_start_clicked();
-
-    void on_next_clicked();
+    void testOpen();
+    void questionNext();
+    void questionSave();
+    void testStart();
+    void submitResult();
+    void timerEvent(QTimerEvent *event);
 
 private:
     Ui::MainWindow *ui;
@@ -33,6 +33,7 @@ private:
     void xorIt(QByteArray *buffer);
     QString fileName;
     QList< QStringList > test;
+    int timeLeft;
 };    
 
 #endif // MAINWINDOW_H
