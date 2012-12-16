@@ -23,6 +23,7 @@ private slots:
     void testOpen();
     void questionNext();
     void questionSave();
+    void questionShow();
     void testStart();
     void submitResult();
     void timerEvent(QTimerEvent *event);
@@ -34,6 +35,8 @@ private:
     QString fileName;
     QList< QStringList > test;
     int timeLeft;
+    int currentQuestion;
+    int score;
 };    
 
 #endif // MAINWINDOW_H

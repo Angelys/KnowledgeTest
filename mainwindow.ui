@@ -119,9 +119,9 @@
         <property name="geometry">
          <rect>
           <x>10</x>
-          <y>40</y>
+          <y>50</y>
           <width>581</width>
-          <height>231</height>
+          <height>211</height>
          </rect>
         </property>
         <property name="widgetResizable">
@@ -133,41 +133,37 @@
            <x>0</x>
            <y>0</y>
            <width>579</width>
-           <height>229</height>
+           <height>209</height>
           </rect>
          </property>
-         <layout class="QGridLayout" name="gridLayout_2">
-          <item row="0" column="0">
-           <layout class="QVBoxLayout" name="verticalLayout_2">
-            <item>
-             <widget class="QRadioButton" name="answer1">
-              <property name="text">
-               <string>Answer 1</string>
-              </property>
-             </widget>
-            </item>
-            <item>
-             <widget class="QRadioButton" name="answer2">
-              <property name="text">
-               <string>Answer 2</string>
-              </property>
-             </widget>
-            </item>
-            <item>
-             <widget class="QRadioButton" name="answer3">
-              <property name="text">
-               <string>Answer 3</string>
-              </property>
-             </widget>
-            </item>
-            <item>
-             <widget class="QRadioButton" name="answer4">
-              <property name="text">
-               <string>Answer 4</string>
-              </property>
-             </widget>
-            </item>
-           </layout>
+         <layout class="QVBoxLayout" name="verticalLayout">
+          <item>
+           <widget class="QRadioButton" name="answer1">
+            <property name="text">
+             <string>Answer 1</string>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <widget class="QRadioButton" name="answer2">
+            <property name="text">
+             <string>Answer 2</string>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <widget class="QRadioButton" name="answer3">
+            <property name="text">
+             <string>Answer 3</string>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <widget class="QRadioButton" name="answer4">
+            <property name="text">
+             <string>Answer 4</string>
+            </property>
+           </widget>
           </item>
          </layout>
         </widget>

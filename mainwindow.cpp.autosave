@@ -98,7 +98,7 @@ void MainWindow::questionShow()
 {
     ui->question->setText("question");
 
-    QObjectList answers =  ui->scrollAreaWidgetContents->layout()->children();
+    QObjectList answers =  ui->scrollAreaWidgetContents->children();
 
     qDebug() << answers;
 
