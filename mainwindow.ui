@@ -18,7 +18,7 @@
     <item row="0" column="0">
      <widget class="QStackedWidget" name="stackedWidget">
       <property name="currentIndex">
-       <number>2</number>
+       <number>0</number>
       </property>
       <widget class="QWidget" name="start_page">
        <widget class="QPushButton" name="start">
@@ -39,18 +39,15 @@
          <rect>
           <x>10</x>
           <y>10</y>
-          <width>431</width>
-          <height>151</height>
+          <width>421</width>
+          <height>91</height>
          </rect>
         </property>
-        <layout class="QFormLayout" name="formLayout">
-         <property name="fieldGrowthPolicy">
-          <enum>QFormLayout::AllNonFixedFieldsGrow</enum>
-         </property>
+        <layout class="QGridLayout" name="gridLayout_2">
          <item row="0" column="0">
           <widget class="QLabel" name="label">
            <property name="text">
-            <string>Test  name:</string>
+            <string>Ім'я тесту:</string>
            </property>
           </widget>
          </item>
@@ -64,7 +61,7 @@
          <item row="1" column="0">
           <widget class="QLabel" name="label_2">
            <property name="text">
-            <string>Test time:</string>
+            <string>Час тесту:</string>
            </property>
           </widget>
          </item>

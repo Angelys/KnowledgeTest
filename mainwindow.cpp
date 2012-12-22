@@ -6,6 +6,11 @@ MainWindow::MainWindow(QWidget *parent) :
     QMainWindow(parent),
     ui(new Ui::MainWindow)
 {
+    QTextCodec *codec = QTextCodec::codecForName("UTF-8");
+    QTextCodec::setCodecForCStrings(codec);
+    QTextCodec::setCodecForLocale(codec);
+    QTextCodec::setCodecForTr(codec);
+
     ui->setupUi(this);
 
     key =  "Швидка руда лисиця стрибає навколо ледачої собаки";
@@ -77,6 +82,7 @@ void MainWindow::testStart()
     timeLeft = test[0][1].toInt();
     startTimer(1000);
 
+    score = 0;
     currentQuestion = 1;
     MainWindow::questionShow();
 
@@ -88,6 +94,7 @@ void MainWindow::testStart()
 void MainWindow::questionNext()
 {
     questionSave();
+
     if( (test.count() - 1) > currentQuestion)
     {
         currentQuestion++;
@@ -116,7 +123,7 @@ void MainWindow::questionSave()
     }
 
 
-    for(int i = 2; i <= test[currentQuestion].count(); i+=2)
+    for(int i = 2; i < test[currentQuestion].count(); i+=2)
     {
         if(test[currentQuestion][i] == label)
         {
@@ -128,7 +135,7 @@ void MainWindow::questionSave()
 
 void MainWindow::questionShow()
 {
-    ui->question->setText("question");
+    ui->question->setText(test[currentQuestion][0]);
 
     clearAnswers();
 
@@ -156,9 +163,9 @@ void MainWindow::clearAnswers()
 
 void MainWindow::setAnswers(int question)
 {
-    for(int i = 2; i <= test[currentQuestion].count(); i+=2)
+    for(int i = 2; i < test[currentQuestion].count(); i+=2)
     {
-        ui->scrollAreaWidgetContents->layout()->addWidget(new QRadioButton(test[currentQuestion][0] , ui->scrollAreaWidgetContents));
+        ui->scrollAreaWidgetContents->layout()->addWidget(new QRadioButton(test[currentQuestion][i] , ui->scrollAreaWidgetContents));
     }
 }
 
@@ -166,7 +173,7 @@ void MainWindow::submitResult()
 {
     ui->stackedWidget->setCurrentIndex(2);
 
-    ui->resultArea->setText("Your result is : " + QString::number(score));
+    ui->resultArea->setText("Фінальний результат : " + QString::number(score));
 }
 
 void MainWindow::timerEvent(QTimerEvent *event)
