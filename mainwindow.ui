@@ -18,7 +18,7 @@
     <item row="0" column="0">
      <widget class="QStackedWidget" name="stackedWidget">
       <property name="currentIndex">
-       <number>1</number>
+       <number>2</number>
       </property>
       <widget class="QWidget" name="start_page">
        <widget class="QPushButton" name="start">
@@ -170,7 +170,7 @@
        </widget>
       </widget>
       <widget class="QWidget" name="result_page">
-       <widget class="QTextEdit" name="textEdit">
+       <widget class="QTextEdit" name="resultArea">
         <property name="geometry">
          <rect>
           <x>10</x>

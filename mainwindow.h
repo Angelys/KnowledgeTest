@@ -24,6 +24,8 @@ private slots:
     void questionNext();
     void questionSave();
     void questionShow();
+    void clearAnswers();
+    void setAnswers(int question);
     void testStart();
     void submitResult();
     void timerEvent(QTimerEvent *event);

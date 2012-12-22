@@ -87,31 +87,86 @@ void MainWindow::testStart()
 
 void MainWindow::questionNext()
 {
-
+    questionSave();
+    if( (test.count() - 1) > currentQuestion)
+    {
+        currentQuestion++;
+        questionShow();
+    } else
+    {
+        submitResult();
+    }
 }
 
 void MainWindow::questionSave()
 {
+    QObjectList children = ui->scrollAreaWidgetContents->children();
+
+    QString label;
+
+    while(!children.isEmpty())
+    {
+        QObject* child = children.takeFirst();
+        QRadioButton* rbutton = qobject_cast<QRadioButton*>(child);
+
+        if( (rbutton != NULL) && (rbutton->isChecked() == true) )
+        {
+            label = rbutton->text();
+        }
+    }
+
+
+    for(int i = 2; i <= test[currentQuestion].count(); i+=2)
+    {
+        if(test[currentQuestion][i] == label)
+        {
+            score += test[currentQuestion][i+1].toInt();
+        }
+    }
+
 }
 
 void MainWindow::questionShow()
 {
     ui->question->setText("question");
 
-    QObjectList answers =  ui->scrollAreaWidgetContents->layout()->children();
+    clearAnswers();
 
-    qDebug() << answers;
+    setAnswers(currentQuestion);
 
-    for ( int i = 0 ; i < answers.count() ; i++ )
+}
+
+void MainWindow::clearAnswers()
+{
+    QLayoutItem *child;
+
+    QObjectList children = ui->scrollAreaWidgetContents->children();
+
+    //Delete all
+    while(!children.isEmpty())
     {
-        delete answers[i];
+        QObject* child = children.takeFirst();
+        if(qobject_cast<QRadioButton*>(child) != NULL)
+        {
+            delete child;
+        }
     }
 
+}
+
+void MainWindow::setAnswers(int question)
+{
+    for(int i = 2; i <= test[currentQuestion].count(); i+=2)
+    {
+        ui->scrollAreaWidgetContents->layout()->addWidget(new QRadioButton(test[currentQuestion][0] , ui->scrollAreaWidgetContents));
+    }
 }
 
 void MainWindow::submitResult()
 {
     ui->stackedWidget->setCurrentIndex(2);
+
+    ui->resultArea->setText("Your result is : " + QString::number(score));
 }
 
 void MainWindow::timerEvent(QTimerEvent *event)
