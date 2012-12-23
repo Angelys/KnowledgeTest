@@ -75,8 +75,11 @@ void MainWindow::testStart()
 {
     if(test.empty())
     {
-        QMessageBox::information(this, tr("Помилка"), tr("Виберіть файл тесту"));
-        return;
+        testOpen();
+
+        if( test.empty() ) {
+            return;
+        }
     }
 
     timeLeft = test[0][1].toInt();
