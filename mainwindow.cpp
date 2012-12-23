@@ -59,7 +59,17 @@ void MainWindow::testOpen()
     dataStream >> test;
 
     ui->test_name->setText( test[0][0] );
-    ui->test_time->setText(test[0][1]);
+
+    int time = test[0][1].toInt();
+    int minutes = time / 60;
+
+    ui->test_time->setText(QString::number(minutes) + tr(" хвилин"));
+
+    if(ui->stackedWidget->currentIndex() == 1)
+    {
+        killTimer(timer);
+        ui->stackedWidget->setCurrentIndex(0);
+    }
 }
 
 void MainWindow::xorIt(QByteArray *buffer)
@@ -80,7 +90,7 @@ void MainWindow::testStart()
     }
 
     timeLeft = test[0][1].toInt();
-    startTimer(1000);
+    timer = startTimer(1000);
 
     score = 0;
     currentQuestion = 1;
@@ -178,7 +188,11 @@ void MainWindow::submitResult()
 
 void MainWindow::timerEvent(QTimerEvent *event)
 {
-    ui->Timer->display(timeLeft);
+    int minutes = timeLeft / 60;
+
+    int seconds = timeLeft - minutes*60;
+
+    ui->Timer->display(QString::number(minutes) + ":" + QString::number(seconds) );
 
     if(timeLeft <=0)
     {

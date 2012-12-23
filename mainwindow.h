@@ -39,6 +39,7 @@ private:
     int timeLeft;
     int currentQuestion;
     int score;
+    int timer;
 };    
 
 #endif // MAINWINDOW_H
