@@ -60,6 +60,8 @@ void MainWindow::testOpen()
 
     ui->test_name->setText( test[0][0] );
 
+    setWindowTitle(test[0][0]);
+
     int time = test[0][1].toInt();
     int minutes = time / 60;
 
